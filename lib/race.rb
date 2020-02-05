@@ -1,11 +1,13 @@
 class Dungeons::Race
 
-    attr_accessor :name, :ability
+    attr_accessor :name, :ability_bonus, :speed
+
     @@all = []
 
     def initialize(race_hash)
         @name = name
-        @ability = name 
+        @ability_bonus = ability_bonus 
+        @speed = speed 
         race_hash.each {|key, value| self.send(("#{key}="), value)}
         @@all << self 
     end
