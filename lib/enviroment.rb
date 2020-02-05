@@ -1,9 +1,9 @@
-require_relative "./lib/dungeons/version"
+require_relative "dungeons/version"
 require 'pry'
 require 'httparty'
-require_relative './lib/dungeons_and_dragons'
-require_relative './lib/api'
-require_relative './lib/dungeon_controller'
+require_relative './dungeons_and_dragons'
+require_relative './api'
+require_relative './dungeon_controller'
 
 
 module Dungeons
