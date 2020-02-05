@@ -1,4 +1,4 @@
-require "dungeons/version"
+require_relative "./lib/dungeons/version"
 require 'pry'
 require 'httparty'
 require_relative './lib/dungeons_and_dragons'

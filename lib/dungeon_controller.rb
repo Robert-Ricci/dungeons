@@ -1,4 +1,4 @@
-class Dungeons::DungeonController
+class Dungeons::Dungeon_Controller
 
 end
 
