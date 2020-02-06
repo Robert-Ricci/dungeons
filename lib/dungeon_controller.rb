@@ -37,8 +37,10 @@ class Dungeons::DungeonController
             race["results"].each do |a|
             puts "#{counter +1}. #{a["name"]}"
             counter += 1
+            #binding.pry
             end
         end
+        puts "Choose a race by number for more information:"
      end
 
     # def list_classes
