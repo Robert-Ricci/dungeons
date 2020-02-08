@@ -9,4 +9,9 @@ class Dungeons::API
         response.parsed_response
     end
 
+    def klass_call
+        url = 'http://www.dnd5eapi.co/api/classes'
+        response = HTTParty.get(url)
+        response.parsed_response
+    end
 end
