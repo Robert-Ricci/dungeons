@@ -2,6 +2,7 @@ require_relative "dungeons/version"
 require 'pry'
 require 'httparty'
 require_relative './race'
+require_relative './klass'
 require_relative './api'
 require_relative './dungeon_controller'
 

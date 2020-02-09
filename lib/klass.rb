@@ -1,13 +1,13 @@
-class Dungeons::Race
+Dungeons::Klass
 
-    attr_accessor :name, :speed, :ability_bonuses
+attr_accessor :name, :hit_die, :proficiency_choices
    
     @@all = []
 
     def initialize(attributes)
         @name = name
-        @speed = speed
-        @ability_bonses = ability_bonuses
+        @hit_die = hit_die
+        @proficiency_choices = proficiency_choices
         attributes.each {|key, value| self.send(("#{key}="), value)}
         save
     end
@@ -20,6 +20,9 @@ class Dungeons::Race
         @@all
     end
 
-    
-end
 
+
+
+
+
+end
