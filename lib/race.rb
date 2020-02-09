@@ -1,14 +1,14 @@
-class Dungeons::Character
+class Dungeons::Race
 
-    attr_accessor :name, :race, :klass, :character
-    @character = []
+    attr_accessor :name, :speed, :ability_bonuses
+   
     @@all = []
 
-    def initialize(race = nil, klass = nil)
-        @race = race
-        @klass = klass
-        @character = character
-        #attributes.each {|key, value| self.send(("#{key}="), value)}
+    def initialize(attributes)
+        @name = name
+        @speed = speed
+        @ability_bonses = ability_bonuses
+        attributes.each {|key, value| self.send(("#{key}="), value)}
         save
     end
 
