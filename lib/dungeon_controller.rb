@@ -2,13 +2,6 @@ require 'pry'
 class Dungeons::DungeonController
 
 
-    attr_accessor :character
-
-    # def initialize
-    #     @character = character
-    # end
-
-
     def welcome
         puts "Welcome Adventurers to my D&D CLI!"
         puts "For the menu type 'menu'"
@@ -16,6 +9,8 @@ class Dungeons::DungeonController
             if input == 'menu'
                 self.menu
             else
+                puts " "
+                puts "Invalid entry,please enter proper response."
                 self.welcome
             end
         end
@@ -23,9 +18,6 @@ class Dungeons::DungeonController
         def menu
             input = " "
         while input != "exit"
-            puts " "
-            puts "To enter your character's name type 'name'"
-            #sleep 1
             puts " "
             puts "For Races type 'list races'"
             #sleep 1
@@ -43,6 +35,8 @@ class Dungeons::DungeonController
                 puts list_races
             when "list classes"
                 puts list_klasses
+            when "exit"
+                exit
             end
         end
     end
@@ -59,13 +53,14 @@ class Dungeons::DungeonController
             counter += 1
             end
         end
-        self.race_info
+        self.race_select
+        
     end
 
-    def race_info
-        input = " "
-        puts "Which race would you like to hear more about?"
-        input = gets.strip
+    def race_info(input)
+        # input = " "
+        # puts "Which race would you like to hear more about?"
+        # input = gets.strip
         info = []
         info << Dungeons::API.new.race_info_call(input.downcase)
         info.each do |z|
@@ -73,10 +68,24 @@ class Dungeons::DungeonController
             puts "Speed: #{z["speed"]}"
             puts "Ability Bonus: #{z["ability_bonuses"][0]["name"]} + #{z["ability_bonuses"][0]["bonus"]}"
             puts " "
-            
-        end
+            end
         self.list_races
     end
+
+    def race_select
+        input = " "
+        puts "Which race would you like to hear more about?"
+        puts "Type 'menu' for main menu. "
+        input = gets.strip
+
+        if input != 'menu'
+            race_info(input)
+        else 
+            menu
+        end
+
+    end
+
 
     def list_klasses
         counter = 0
@@ -89,10 +98,10 @@ class Dungeons::DungeonController
             counter += 1
             end
         end
-        self.klass_info
+        self.klass_select
     end
     
-    def klass_info
+    def klass_info(input)
         input = " "
         puts "Which class would you like to hear more about?"
         input = gets.strip
@@ -103,19 +112,21 @@ class Dungeons::DungeonController
             puts "Hit-Die: #{z["hit_die"]}"
             puts "Proficiency choices: #{z["proficiency_choices"][0]["choose"]}"
             puts " "
-        
         end
         self.list_klasses
     end
     
-        def error_message
-            puts "You have entered and invalid entry."
-            puts self.menu
+    def klass_select
+        input = " "
+        puts "Which race would you like to hear more about?"
+        puts "Type 'menu' for main menu. "
+        input = gets.strip
+
+        if input != 'menu'
+            klass_info(input)
+        else 
+            menu
         end
-
-        
-
-   
-
+    end
 end
 
