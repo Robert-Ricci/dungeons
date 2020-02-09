@@ -78,11 +78,12 @@ class Dungeons::DungeonController
         puts "Which race would you like to hear more about?"
         input = gets.strip
         @info = []
-        @info << Dungeons::API.new.info_call(input)
+        @info << Dungeons::API.new.race_info_call(input)
         @info.each do |z|
             puts "#{z["name"]}"
             puts "Speed: #{z["speed"]}"
             puts "Ability Bonus: #{z["ability_bonuses"][0]["name"]} + #{z["ability_bonuses"][0]["bonus"]}"
+            puts " "
         end
         self.list_races
     end
@@ -98,31 +99,28 @@ class Dungeons::DungeonController
             counter += 1
             end
         end
-        #self.choose_klass
+        self.klass_info
     end
     
-
-    # def choose_race
-    #     input = " "
-    #     puts " "
-    #     puts "Choose a race for your adventure"
-    #     input = gets.strip
-
-    #     if input == "dwarf"
-    #        self.character << Dungeons::Character.add_race("Dwarf")
-
-    #     end
-
+    def klass_info
+        input = " "
+        puts "Which class would you like to hear more about?"
+        input = gets.strip
+        @klass_info = []
+        @klass_info << Dungeons::API.new.klass_info_call(input)
+        @klass_info.each do |z|
+            puts "#{z["name"]}"
+            puts "Hit-Die: #{z["hit_die"]}"
+            puts "Proficiency choices: #{z["proficiency_choices"][0]["choose"]}"
+            puts " "
+        end
+        self.list_klasses
+    end
+    
         
         
 
-    #  end
-
-    #  def choose_klass
-    #     puts " "
-    #     puts "Choose a class for your adventure"
-    #     input = gets.strip
-    #  end
+   
 
 end
 

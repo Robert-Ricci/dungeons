@@ -9,7 +9,7 @@ class Dungeons::API
         response.parsed_response
     end
 
-    def info_call(input)
+    def race_info_call(input)
         url = 'http://www.dnd5eapi.co/api/races'
         response = HTTParty.get(url + "/#{input}")
         response.parsed_response
@@ -18,6 +18,12 @@ class Dungeons::API
     def klass_call
         url = 'http://www.dnd5eapi.co/api/classes'
         response = HTTParty.get(url)
+        response.parsed_response
+    end
+
+    def klass_info_call(input)
+        url = 'http://www.dnd5eapi.co/api/classes'
+        response = HTTParty.get(url + "/#{input}")
         response.parsed_response
     end
 end
