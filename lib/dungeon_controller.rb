@@ -2,6 +2,13 @@ require 'pry'
 class Dungeons::DungeonController
 
 
+    attr_accessor :character
+
+    # def initialize
+    #     @character = character
+    # end
+
+
     def welcome
         puts "Welcome Adventurers to my D&D CLI!"
         puts "For the menu type 'menu'"
@@ -17,13 +24,13 @@ class Dungeons::DungeonController
             input = " "
         while input != "exit"
             puts " "
+            puts "To enter your character's name type 'name'"
+            #sleep 1
+            puts " "
             puts "For Races type 'list races'"
             #sleep 1
             puts " "
             puts "For Classes type 'list classes'"
-            #sleep 1
-            puts " "
-            puts "Type 'race info' plus the race to get more info"
             #sleep 1
             puts " "
             puts "To quit type 'exit'"
@@ -35,12 +42,22 @@ class Dungeons::DungeonController
             when "list races"
                 puts list_races
             when "list classes"
-                puts list_classes
-            when "race info"
-                puts race_info
+                puts list_klasses
+            # when "name"
+            #     puts save_name
+
             end
         end
     end
+
+
+    # def save_name
+    #     puts "Enter your character's name."
+    #     input = gets.strip
+        
+    #     self.character = Dungeons::Character.create(input)
+
+    # end
 
     def list_races
         counter = 0
@@ -53,10 +70,24 @@ class Dungeons::DungeonController
             counter += 1
             end
         end
-        self.choose_race
+        self.race_info
     end
 
-    def list_classes
+    def race_info
+        input = " "
+        puts "Which race would you like to hear more about?"
+        input = gets.strip
+        @info = []
+        @info << Dungeons::API.new.info_call(input)
+        @info.each do |z|
+            puts "#{z["name"]}"
+            puts "Speed: #{z["speed"]}"
+            puts "Ability Bonus: #{z["ability_bonuses"][0]["name"]} + #{z["ability_bonuses"][0]["bonus"]}"
+        end
+        self.list_races
+    end
+
+    def list_klasses
         counter = 0
         index = 0
         @klass_hash = []
@@ -67,27 +98,31 @@ class Dungeons::DungeonController
             counter += 1
             end
         end
-        self.choose_klass
+        #self.choose_klass
     end
     
-    
 
-    # def race_info
-    #   puts @race_hash  
-    #   #binding.pry
-    # end
+    # def choose_race
+    #     input = " "
+    #     puts " "
+    #     puts "Choose a race for your adventure"
+    #     input = gets.strip
 
-    def choose_race
-        puts " "
-        puts "Choose a race for your adventure"
-        input = gets.strip
-     end
+    #     if input == "dwarf"
+    #        self.character << Dungeons::Character.add_race("Dwarf")
 
-     def choose_klass
-        puts " "
-        puts "Choose a class for your adventure"
-        input = gets.strip
-     end
+    #     end
+
+        
+        
+
+    #  end
+
+    #  def choose_klass
+    #     puts " "
+    #     puts "Choose a class for your adventure"
+    #     input = gets.strip
+    #  end
 
 end
 
