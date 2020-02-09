@@ -1,4 +1,4 @@
-Dungeons::Klass
+class Dungeons::Klass
 
 attr_accessor :name, :hit_die, :proficiency_choices
    
@@ -19,10 +19,5 @@ attr_accessor :name, :hit_die, :proficiency_choices
     def self.all
         @@all
     end
-
-
-
-
-
 
 end

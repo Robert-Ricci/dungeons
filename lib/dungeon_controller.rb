@@ -45,9 +45,9 @@ class Dungeons::DungeonController
     def list_races
         counter = 0
         index = 0
-        race_hash = []
-        race_hash << Dungeons::API.new.race_call
-        race_hash.sort{|x, y| x <=> y}.each do |race|
+        race_array = []
+        race_array << Dungeons::API.new.race_call
+        race_array.sort{|x, y| x <=> y}.each do |race|
             race["results"].each do |a|
             puts "#{counter +1}. #{a["name"]}"
             counter += 1
@@ -58,9 +58,6 @@ class Dungeons::DungeonController
     end
 
     def race_info(input)
-        # input = " "
-        # puts "Which race would you like to hear more about?"
-        # input = gets.strip
         info = []
         info << Dungeons::API.new.race_info_call(input.downcase)
         info.each do |z|
@@ -90,9 +87,9 @@ class Dungeons::DungeonController
     def list_klasses
         counter = 0
         index = 0
-        klass_hash = []
-        klass_hash << Dungeons::API.new.klass_call
-        klass_hash.sort{|x, y| x <=> y}.each do |klass|
+        klass_array = []
+        klass_array << Dungeons::API.new.klass_call
+        klass_array.sort{|x, y| x <=> y}.each do |klass|
             klass["results"].each do |a|
             puts "#{counter +1}. #{a["name"]}"
             counter += 1
@@ -102,9 +99,9 @@ class Dungeons::DungeonController
     end
     
     def klass_info(input)
-        input = " "
-        puts "Which class would you like to hear more about?"
-        input = gets.strip
+        # input = " "
+        # puts "Which class would you like to hear more about?"
+        # input = gets.strip
         klass_info = []
         klass_info << Dungeons::API.new.klass_info_call(input.downcase)
         klass_info.each do |z|
@@ -118,7 +115,7 @@ class Dungeons::DungeonController
     
     def klass_select
         input = " "
-        puts "Which race would you like to hear more about?"
+        puts "Which class would you like to hear more about?"
         puts "Type 'menu' for main menu. "
         input = gets.strip
 
