@@ -1,7 +1,8 @@
 require 'pry'
 class Dungeons::DungeonController
 
-
+    attr_accessor :character
+    
     def welcome
         puts "Welcome Adventurers to my D&D CLI!"
         puts "For the menu type 'menu'"
@@ -43,30 +44,25 @@ class Dungeons::DungeonController
 
 
     def list_races
-        counter = 0
-        index = 0
-        race_array = []
-        race_array << Dungeons::API.new.race_call
-        race_array.sort{|x, y| x <=> y}.each do |race|
-            race["results"].each do |a|
-            puts "#{counter +1}. #{a["name"]}"
-            counter += 1
-            end
+        
+        response = Dungeons::API.new.race_call
+        response["results"].each_with_index do |race, value| 
+            puts "#{value + 1}.#{race['name']}"
         end
         self.race_select
-        
     end
 
     def race_info(input)
-        info = []
-        info << Dungeons::API.new.race_info_call(input.downcase)
-        info.each do |z|
+        
+        response = Dungeons::API.new.race_info_call(input.downcase)
+        #binding.pry
+        response.each do |z|
             puts "#{z["name"]}"
             puts "Speed: #{z["speed"]}"
             puts "Ability Bonus: #{z["ability_bonuses"][0]["name"]} + #{z["ability_bonuses"][0]["bonus"]}"
             puts " "
-            end
-        self.list_races
+       end
+            self.list_races
     end
 
     def race_select
@@ -85,17 +81,24 @@ class Dungeons::DungeonController
 
 
     def list_klasses
-        counter = 0
-        index = 0
-        klass_array = []
-        klass_array << Dungeons::API.new.klass_call
-        klass_array.sort{|x, y| x <=> y}.each do |klass|
-            klass["results"].each do |a|
-            puts "#{counter +1}. #{a["name"]}"
-            counter += 1
-            end
+        response = Dungeons::API.new.klass_call
+        response["results"].each_with_index do |race, value| 
+            puts "#{value + 1}.#{race['name']}"
         end
         self.klass_select
+        
+        
+        # counter = 0
+        # index = 0
+        # klass_array = []
+        # klass_array << Dungeons::API.new.klass_call
+        # klass_array.sort{|x, y| x <=> y}.each do |klass|
+        #     klass["results"].each do |a|
+        #     puts "#{counter +1}. #{a["name"]}"
+        #     counter += 1
+        #     end
+        # end
+        # self.klass_select
     end
     
     def klass_info(input)
@@ -125,5 +128,10 @@ class Dungeons::DungeonController
             menu
         end
     end
+
+    def error_message
+        puts "Invalid entry, please try again."
+    end
+
 end
 

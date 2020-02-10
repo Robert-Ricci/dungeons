@@ -5,9 +5,9 @@ class Dungeons::Race
     @@all = []
 
     def initialize(attributes)
+        #binding.pry
         @name = name
-        @speed = speed
-        @ability_bonses = ability_bonuses
+        
         attributes.each {|key, value| self.send(("#{key}="), value)}
         save
     end
