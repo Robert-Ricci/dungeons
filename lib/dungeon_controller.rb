@@ -44,7 +44,6 @@ class Dungeons::DungeonController
 
 
     def list_races
-        
         response = Dungeons::API.new.race_call
         response["results"].each_with_index do |race, value| 
             puts "#{value + 1}.#{race['name']}"
@@ -52,14 +51,26 @@ class Dungeons::DungeonController
         self.race_select
     end
 
+    def get_race(input)
+        if Dungeons::Race.get_race_by_name(input)
+            self.character = Dungeons::Race.get_race_by_name(input)
+          else
+            response = Dungeons::API.new.race_info_call(input)
+            if response != :error
+              self.character = Dungeons::Race.new(response)
+            else
+              self.error_message
+            end
+          end
+        self.race_info(input)
+    end
+
     def race_info(input)
-        
-        response = Dungeons::API.new.race_info_call(input.downcase)
-        #binding.pry
-        response.each do |z|
-            puts "#{z["name"]}"
-            puts "Speed: #{z["speed"]}"
-            puts "Ability Bonus: #{z["ability_bonuses"][0]["name"]} + #{z["ability_bonuses"][0]["bonus"]}"
+            Dungeons::Race.all.each do |race|
+            puts "#{race.name}"
+            puts "Speed: #{race.speed}"
+            puts "Ability Bonus: #{race.ability_bonuses[0]["name"]} + #{race.ability_bonuses[0]["bonus"]}"
+            puts "Size:#{race.size}"
             puts " "
        end
             self.list_races
@@ -71,11 +82,11 @@ class Dungeons::DungeonController
         puts "Type 'menu' for main menu. "
         input = gets.strip
 
-        if input != 'menu'
-            race_info(input)
-        else 
-            menu
-        end
+        if input != "menu"
+            self.get_race(input.downcase)
+        elsif input 
+            self.menu
+       end
 
     end
 
@@ -87,32 +98,34 @@ class Dungeons::DungeonController
         end
         self.klass_select
         
-        
-        # counter = 0
-        # index = 0
-        # klass_array = []
-        # klass_array << Dungeons::API.new.klass_call
-        # klass_array.sort{|x, y| x <=> y}.each do |klass|
-        #     klass["results"].each do |a|
-        #     puts "#{counter +1}. #{a["name"]}"
-        #     counter += 1
-        #     end
-        # end
-        # self.klass_select
     end
     
+    def get_klass(input)
+        if Dungeons::Klass.get_klass_by_name(input)
+            self.character = Dungeons::Klass.get_klass_by_name(input)
+          else
+            response = Dungeons::API.new.klass_info_call(input)
+            if response != :error
+              self.character = Dungeons::Klass.new(response)
+            else
+              self.error_message
+            end
+          end
+          
+        self.klass_info(input)
+    end
+
     def klass_info(input)
-        # input = " "
-        # puts "Which class would you like to hear more about?"
-        # input = gets.strip
-        klass_info = []
-        klass_info << Dungeons::API.new.klass_info_call(input.downcase)
-        klass_info.each do |z|
-            puts "#{z["name"]}"
-            puts "Hit-Die: #{z["hit_die"]}"
-            puts "Proficiency choices: #{z["proficiency_choices"][0]["choose"]}"
+        Dungeons::Klass.all.each do |klass|
+            puts "#{klass.name}"
+            puts "Hit-Die: #{klass.hit_die}"
+            puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
+            puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
+            puts "Saving Throws: #{klass.saving_throws[0]["name"]} + #{y.saving_throws[1]["name"]}"
+            puts "Subclasses: #{klass.subclasses[0]["name"]}"
             puts " "
         end
+        
         self.list_klasses
     end
     
@@ -123,7 +136,7 @@ class Dungeons::DungeonController
         input = gets.strip
 
         if input != 'menu'
-            klass_info(input)
+            get_klass(input.downcase)
         else 
             menu
         end
