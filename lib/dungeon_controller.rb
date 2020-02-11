@@ -105,7 +105,7 @@ class Dungeons::DungeonController
             self.character = Dungeons::Klass.get_klass_by_name(input)
           else
             response = Dungeons::API.new.klass_info_call(input)
-            if response != :error
+            if response != " "
               self.character = Dungeons::Klass.new(response)
             else
               self.error_message
