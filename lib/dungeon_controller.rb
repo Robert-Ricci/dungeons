@@ -68,7 +68,6 @@ class Dungeons::DungeonController
     end
 
     def race_info
-            #Dungeons::Race.all.each do |race|
             puts "-------------------------" 
             puts "#{character.name}"
             puts "Speed: #{character.speed}"
