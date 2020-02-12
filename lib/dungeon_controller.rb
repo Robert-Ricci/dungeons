@@ -72,7 +72,8 @@ class Dungeons::DungeonController
             puts "#{character.name}"
             puts "Speed: #{character.speed}"
             puts "Ability Bonus: #{character.ability_bonuses[0]["name"]} + #{character.ability_bonuses[0]["bonus"]}"
-            puts "Size:#{character.size}"
+            puts "Size:#{character.size_description}"
+            puts "Aligment: #{character.alignment}"
             puts " "
        
             self.list_races
@@ -142,6 +143,7 @@ class Dungeons::DungeonController
     end
 
     def error_message
+        puts " "
         puts "Invalid entry, please try again.".bold
         puts " "
     end
