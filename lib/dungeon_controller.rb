@@ -107,10 +107,11 @@ class Dungeons::DungeonController
             self.character = Dungeons::Klass.get_klass_by_name(input)
           else
             response = Dungeons::API.new.klass_info_call(input)
-            if response != "error"
+            if !response["error"]
               self.character = Dungeons::Klass.new(response)
             else
               self.error_message
+              self.list_klasses
             end
           end
         self.klass_info(input)
