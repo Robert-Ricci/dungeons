@@ -4,6 +4,7 @@ class Dungeons::DungeonController
     attr_accessor :character
     
     def welcome
+        puts " "
         puts "Welcome Adventurers to my D&D CLI!".red
         puts "For the menu type 'menu'"
         input = gets.strip
@@ -20,13 +21,13 @@ class Dungeons::DungeonController
         while input != "exit"
             sleep 1
             puts " "
-            puts "For Races type 'list races'"
+            puts (("For Races type") + (" 'list races'".red))
             sleep 1
             puts " "
-            puts "For Classes type 'list classes'"
+            puts (("For Classes type") + (" 'list classes'".red))
             sleep 1
             puts " "
-            puts "To Quit type 'exit'"
+            puts (("To Quit type") + (" 'exit'".red))
             
             input = gets.strip
 
