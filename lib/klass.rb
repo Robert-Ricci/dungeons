@@ -9,7 +9,6 @@ attr_accessor :name, :hit_die, :proficiency_choices, :_id, :index, :proficiencie
 
     def initialize(attributes)
         @name = name
-        
         attributes.each {|key, value| self.send(("#{key}="), value)}
         save
     end

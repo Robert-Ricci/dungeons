@@ -9,7 +9,6 @@ class Dungeons::Race
     def initialize(response)
         @name = name
         response.each {|key, value| self.send(("#{key}="), value)}
-        #binding.pry
         save
     end
 

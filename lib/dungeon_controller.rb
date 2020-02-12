@@ -56,21 +56,24 @@ class Dungeons::DungeonController
             self.character = Dungeons::Race.get_race_by_name(input)
           else
             response = Dungeons::API.new.race_info_call(input)
-            if response != :error
+            
+            if !response["error"]
               self.character = Dungeons::Race.new(response)
             else
               self.error_message
+              self.list_races
             end
           end
-        self.race_info(input)
+        self.race_info
     end
 
-    def race_info(input)
-            Dungeons::Race.all.each do |race|
-            puts "#{race.name}"
-            puts "Speed: #{race.speed}"
-            puts "Ability Bonus: #{race.ability_bonuses[0]["name"]} + #{race.ability_bonuses[0]["bonus"]}"
-            puts "Size:#{race.size}"
+    def race_info
+            #Dungeons::Race.all.each do |race|
+            puts "-------------------------" 
+            puts "#{character.name}"
+            puts "Speed: #{character.speed}"
+            puts "Ability Bonus: #{character.ability_bonuses[0]["name"]} + #{character.ability_bonuses[0]["bonus"]}"
+            puts "Size:#{character.size}"
             puts " "
        end
             self.list_races
@@ -84,7 +87,7 @@ class Dungeons::DungeonController
 
         if input != "menu"
             self.get_race(input.downcase)
-        elsif input 
+        elsif 
             self.menu
        end
 
@@ -97,7 +100,6 @@ class Dungeons::DungeonController
             puts "#{value + 1}.#{race['name']}"
         end
         self.klass_select
-        
     end
     
     def get_klass(input)
@@ -105,27 +107,26 @@ class Dungeons::DungeonController
             self.character = Dungeons::Klass.get_klass_by_name(input)
           else
             response = Dungeons::API.new.klass_info_call(input)
-            if response != " "
+            if response != "error"
               self.character = Dungeons::Klass.new(response)
             else
               self.error_message
             end
           end
-          
         self.klass_info(input)
     end
 
     def klass_info(input)
         Dungeons::Klass.all.each do |klass|
+            puts "-------------------------"
             puts "#{klass.name}"
             puts "Hit-Die: #{klass.hit_die}"
             puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
             puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
-            puts "Saving Throws: #{klass.saving_throws[0]["name"]} + #{y.saving_throws[1]["name"]}"
+            puts "Saving Throws: #{klass.saving_throws[0]["name"]} + #{klass.saving_throws[1]["name"]}"
             puts "Subclasses: #{klass.subclasses[0]["name"]}"
             puts " "
         end
-        
         self.list_klasses
     end
     
