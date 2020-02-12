@@ -74,7 +74,7 @@ class Dungeons::DungeonController
             puts "Ability Bonus: #{character.ability_bonuses[0]["name"]} + #{character.ability_bonuses[0]["bonus"]}"
             puts "Size:#{character.size}"
             puts " "
-       end
+       
             self.list_races
     end
 
@@ -113,20 +113,18 @@ class Dungeons::DungeonController
               self.list_klasses
             end
           end
-        self.klass_info(input)
+        self.klass_info
     end
 
-    def klass_info(input)
-        Dungeons::Klass.all.each do |klass|
+    def klass_info
             puts "-------------------------"
-            puts "#{klass.name}"
-            puts "Hit-Die: #{klass.hit_die}"
-            puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
-            puts "Proficiency choices: #{klass.proficiency_choices[0]["choose"]}"
-            puts "Saving Throws: #{klass.saving_throws[0]["name"]} + #{klass.saving_throws[1]["name"]}"
-            puts "Subclasses: #{klass.subclasses[0]["name"]}"
+            puts "#{character.name}"
+            puts "Hit-Die: #{character.hit_die}"
+            puts "Proficiency choices: #{character.proficiency_choices[0]["choose"]}"
+            puts "Proficiency choices: #{character.proficiency_choices[0]["choose"]}"
+            puts "Saving Throws: #{character.saving_throws[0]["name"]} + #{character.saving_throws[1]["name"]}"
+            puts "Subclasses: #{character.subclasses[0]["name"]}"
             puts " "
-        end
         self.list_klasses
     end
     
