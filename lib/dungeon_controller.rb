@@ -4,14 +4,13 @@ class Dungeons::DungeonController
     attr_accessor :character
     
     def welcome
-        puts "Welcome Adventurers to my D&D CLI!"
+        puts "Welcome Adventurers to my D&D CLI!".red
         puts "For the menu type 'menu'"
         input = gets.strip
             if input == 'menu'
                 self.menu
             else
-                puts " "
-                puts "Invalid entry,please enter proper response."
+               self.error_message
                 self.welcome
             end
         end
@@ -19,14 +18,15 @@ class Dungeons::DungeonController
         def menu
             input = " "
         while input != "exit"
+            sleep 1
             puts " "
             puts "For Races type 'list races'"
-            #sleep 1
+            sleep 1
             puts " "
             puts "For Classes type 'list classes'"
-            #sleep 1
+            sleep 1
             puts " "
-            puts "To quit type 'exit'"
+            puts "To Quit type 'exit'"
             
             input = gets.strip
 
@@ -142,7 +142,8 @@ class Dungeons::DungeonController
     end
 
     def error_message
-        puts "Invalid entry, please try again."
+        puts "Invalid entry, please try again.".bold
+        puts " "
     end
 
 end
