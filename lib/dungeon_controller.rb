@@ -123,7 +123,6 @@ class Dungeons::DungeonController
             puts "#{character.name}"
             puts "Hit-Die: #{character.hit_die}"
             puts "Proficiency choices: #{character.proficiency_choices[0]["choose"]}"
-            puts "Proficiency choices: #{character.proficiency_choices[0]["choose"]}"
             puts "Saving Throws: #{character.saving_throws[0]["name"]} + #{character.saving_throws[1]["name"]}"
             puts "Subclasses: #{character.subclasses[0]["name"]}"
             puts " "
