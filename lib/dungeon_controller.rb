@@ -11,7 +11,7 @@ class Dungeons::DungeonController
             if input == 'menu'
                 self.menu
             else
-               self.error_message
+                self.error_message
                 self.welcome
             end
         end
@@ -52,6 +52,19 @@ class Dungeons::DungeonController
         self.race_select
     end
 
+    def race_select
+        input = " "
+        puts "Which race would you like to hear more about?"
+        puts "Type 'menu' for main menu. "
+        input = gets.strip
+
+        if input != "menu"
+            self.get_race(input.downcase)
+        elsif 
+            self.menu
+       end
+    end
+
     def get_race(input)
         if Dungeons::Race.get_race_by_name(input)
             self.character = Dungeons::Race.get_race_by_name(input)
@@ -80,19 +93,7 @@ class Dungeons::DungeonController
             self.list_races
     end
 
-    def race_select
-        input = " "
-        puts "Which race would you like to hear more about?"
-        puts "Type 'menu' for main menu. "
-        input = gets.strip
-
-        if input != "menu"
-            self.get_race(input.downcase)
-        elsif 
-            self.menu
-       end
-
-    end
+    
 
 
     def list_klasses
@@ -103,6 +104,19 @@ class Dungeons::DungeonController
         self.klass_select
     end
     
+    def klass_select
+        input = " "
+        puts "Which class would you like to hear more about?"
+        puts "Type 'menu' for main menu. "
+        input = gets.strip
+
+        if input != 'menu'
+            get_klass(input.downcase)
+        else 
+            menu
+        end
+    end
+
     def get_klass(input)
         if Dungeons::Klass.get_klass_by_name(input)
             self.character = Dungeons::Klass.get_klass_by_name(input)
@@ -129,19 +143,6 @@ class Dungeons::DungeonController
         self.list_klasses
     end
     
-    def klass_select
-        input = " "
-        puts "Which class would you like to hear more about?"
-        puts "Type 'menu' for main menu. "
-        input = gets.strip
-
-        if input != 'menu'
-            get_klass(input.downcase)
-        else 
-            menu
-        end
-    end
-
     def error_message
         puts " "
         puts "Invalid entry, please try again.".bold
